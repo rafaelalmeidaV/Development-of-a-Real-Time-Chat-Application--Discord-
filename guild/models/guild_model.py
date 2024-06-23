@@ -13,6 +13,7 @@ class Guild(models.Model):
     is_active = models.BooleanField(default=True)
     id_user_creator = models.ForeignKey(User, related_name='guildas_criadas', on_delete=models.CASCADE) 
     id_user_members = models.ManyToManyField(User, related_name='guild_members')
+    created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.name

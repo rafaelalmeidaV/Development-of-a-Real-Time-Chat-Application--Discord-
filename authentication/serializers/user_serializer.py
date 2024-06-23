@@ -15,13 +15,15 @@ class UserSerializer(serializers.ModelSerializer):
             'is_admin',
             'is_staff',
             'owned_guilds',
-            'member_guilds'
+            'member_guilds',
+            'created_at'
         ]
         read_only_fields = [
             'is_active',
             'is_admin',
             'is_staff',
-            'owned_guilds'
+            'owned_guilds',
+            'created_at'
         ]
         extra_kwargs = {
             'password': {'write_only': True}

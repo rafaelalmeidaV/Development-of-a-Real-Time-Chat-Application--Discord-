@@ -15,6 +15,13 @@ class GuildSerializer(serializers.ModelSerializer):
             'description',
             'is_active',
             'id_user_creator',
-            'id_user_members'
+            'id_user_members',
+            'created_at'
         ]
-        read_only_fields = ['id', 'is_active', 'id_user_creator', 'id_user_members']
+        read_only_fields = [
+            'id', 
+            'is_active',
+            'id_user_creator',
+            'id_user_members'
+            'created_at'
+            ]
