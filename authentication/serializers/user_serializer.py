@@ -36,6 +36,8 @@ class UserSerializer(serializers.ModelSerializer):
         instance.email = validated_data.get('email', instance.email)
         instance.save()
         return instance
+    
+
 
 
 class ADMSerializer(serializers.ModelSerializer):
