@@ -18,9 +18,17 @@ class CreateAdminView(generics.CreateAPIView):
 class ListUserbyEmailView(generics.RetrieveAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = UserSerializer
-    queryset = User.objects.all()
-    lookup_field = 'email'
-    lookup_url_kwarg = 'user_email'    
+    filterset_fields = ["email"]
+    pagination_class = None 
+    
+    def list(self, request):
+        email = request.query_params.get('email', None)
+        if email is not None:
+            queryset = User.objects.filter(email=email)
+            serializer = UserSerializer(queryset, many=True)
+            return Response(serializer.data)
+        else:
+            return Response({"message": "Email não informado"}, status=status.HTTP_400_BAD_REQUEST)
     
 
 class ListUsersView(generics.ListAPIView):
