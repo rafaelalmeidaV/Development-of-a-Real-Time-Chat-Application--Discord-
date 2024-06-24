@@ -20,12 +20,12 @@ class AddMemberToGuild(APIView):
             return Response({"message": "Apenas o criador pode adicionar membros."}, status=status.HTTP_403_FORBIDDEN)
         user = get_object_or_404(User, id=user_id)
         guild.id_user_members.add(user, request.user)
-        self.request.user.member_guilds += 1
+        user.member_guilds += 1
+        user.save()
         self.request.user.save()
         guild.save()
         
         return Response(status=status.HTTP_200_OK)
-
 
 class CreateListGuild(generics.ListCreateAPIView):
     serializer_class = GuildSerializer

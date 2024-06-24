@@ -13,6 +13,12 @@ class CreateAdminView(generics.CreateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
     
+    def perform_create(self, serializer):
+        user = serializer.save()
+        user.is_admin = True
+        user.is_staff = True
+        user.save()
+    
 class ListSuperUsersView(generics.ListAPIView):
     permission_classes = [IsAdminUser]
     serializer_class = UserSerializer
