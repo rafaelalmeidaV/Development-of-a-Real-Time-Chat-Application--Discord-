@@ -3,7 +3,8 @@ from authentication.models.user_models import User
 from authentication.serializers.user_serializer import UserSerializer
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from django.db.models import Count
-
+from rest_framework.response import Response
+from rest_framework import status
 class CreateUserView(generics.CreateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
@@ -13,6 +14,15 @@ class CreateAdminView(generics.CreateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
     
+
+class ListUserbyEmailView(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+    lookup_field = 'email'
+    lookup_url_kwarg = 'user_email'    
+    
+
 class ListUsersView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = UserSerializer
