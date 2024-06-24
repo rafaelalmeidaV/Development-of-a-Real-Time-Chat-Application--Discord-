@@ -10,9 +10,13 @@ class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
     
 class CreateAdminView(generics.CreateAPIView):
-    permission_classes = [IsAuthenticated, IsAdminUser]
     serializer_class = UserSerializer
     queryset = User.objects.all()
+    
+class ListSuperUsersView(generics.ListAPIView):
+    permission_classes = [IsAdminUser]
+    serializer_class = UserSerializer
+    queryset = User.objects.filter(is_admin=True)
     
 
 class ListUserbyEmailView(generics.RetrieveAPIView):

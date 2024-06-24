@@ -42,8 +42,7 @@ class CreateListGuild(generics.ListCreateAPIView):
 class ListMyGuilds(generics.ListAPIView):
     serializer_class = GuildSerializer
     permission_classes = [IsAuthenticated]
-    queryset = Guild.objects.all()
-    
+
     def get_queryset(self):
         queryset = Guild.objects.filter(id_user_members=self.request.user)
         return queryset
